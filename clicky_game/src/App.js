@@ -17,6 +17,57 @@ function shuffleCharacters(array) {
   }
   return array;
 };
+ 
+//create app component
+class App extends Component {
+ //set this.state
+ state = {
+   characters,
+   currentScore: 0,
+   topScore: 0, 
+   rightWrong: "", 
+   clicked: [],
+ };
+
+ handleClick = id => {
+   if (this.state.clicked.indexOf(id) === -1) {
+     this.handleIncrement();
+     this.setState({ clicked: this.state.clicked.concat(id) });
+   } else {
+     this.handleReset();
+   }
+ };
+
+ handleIncrement = () => {
+   const newScore = this.state.currentScore + 1;
+   this.setState({
+     currentScore: newScore,
+     rightWrong: ""
+   });
+   if (newScore >= this.state.topScore) {
+     this.setState({ topScore: newScore});
+   }
+   else if (newScore === 12) {
+     this.setState({ rightWrong: "You Win!" });
+   }
+   this.handleShuffle();
+ };
+
+ handleReset = () => {
+   this.setState({
+     currentScore: 0,
+     topScore: this.state.topScore,
+     rightWrong: "Avada Kedavra!", 
+     clicked: []
+   });
+   this.handleShuffle();
+ };
+
+ handleShuffle = () => {
+   let shuffleCharacters = shuffleCharacters (characters);
+   this. setState({characters: shuffleCharacters});
+ };
+}
 
 function App() {
   return (
