@@ -67,27 +67,40 @@ class App extends Component {
    let shuffleCharacters = shuffleCharacters (characters);
    this. setState({characters: shuffleCharacters});
  };
-}
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ render() {
+   return (
+     <Wrapper>
+       <Nav
+       title= "Harry Potter Clicky Game"
+       score = {this.state.currentScore}
+       topScore = {this.state.topScore}
+       rightWrong = {this.state.rightWrong}
+       />
+       <Title>
+         Try to click on each character without hitting any duplicates!
+       </Title>
+
+       <Container>
+         <Row>
+           {this.state.characters.map(friend => (
+             <Column size= "md-3" "sm-6">
+               <CharacterCard
+                  key={characters.id}
+                  handleClick={this.handleClick}
+                  handleIncrement={this.handleIncrement}
+                  handleReset={this.handleReset}
+                  handleShuffle={this.handleShuffle}
+                  id={characters.id}
+                  image={characters.image}
+                />
+              </Column>    
+           ))}
+         </Row>
+       </Container>
+     </Wrapper>
+   );
+ }
 }
 
 export default App;
